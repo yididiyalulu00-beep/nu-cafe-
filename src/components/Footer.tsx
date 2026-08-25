@@ -2,6 +2,7 @@ import React from 'react';
 import { Coffee, MapPin, Phone, Clock, Heart, Instagram, Facebook, Send, ArrowUp } from 'lucide-react';
 import { CAFE_INFO } from '../data/cafeData';
 import { useLanguage } from '../context/LanguageContext';
+import { NuCafeLogo } from './NuCafeLogo';
 
 export const Footer: React.FC = () => {
   const { language, t } = useLanguage();
@@ -37,13 +38,18 @@ export const Footer: React.FC = () => {
           {/* Col 1: Brand & Tagline */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#C5A059] flex items-center justify-center text-[#2D1B0D] shadow-xs">
-                <Coffee className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center p-1 shadow-md border border-[#D4C3A1]/40 shrink-0">
+                <NuCafeLogo size="sm" variant="emblem" theme="original" />
               </div>
               <div>
-                <span className="font-serif text-2xl font-bold tracking-tight text-[#FDFBF7]">
-                  Nu Café
-                </span>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-serif text-2xl font-bold tracking-tight text-[#FDFBF7]">
+                    Nu Café
+                  </span>
+                  <span className="font-serif text-sm font-bold text-[#34D399]">
+                    (ኑ ካፌ)
+                  </span>
+                </div>
                 <span className="block text-[9px] tracking-[0.2em] uppercase text-[#C5A059] font-bold">
                   {language === 'am' ? 'አዲስ አበባ፣ ኢትዮጵያ' : 'Addis Ababa, Ethiopia'}
                 </span>

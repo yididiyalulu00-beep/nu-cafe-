@@ -11,9 +11,11 @@ import { ReviewsSection } from './components/ReviewsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { FloatingActions } from './components/FloatingActions';
+import { BrandShowcaseModal } from './components/BrandShowcaseModal';
 
 function MainContent() {
   const [activeSection, setActiveSection] = useState<string>('hero');
+  const [isBrandModalOpen, setIsBrandModalOpen] = useState<boolean>(false);
 
   // Track active section for navigation highlighting
   useEffect(() => {
@@ -41,7 +43,10 @@ function MainContent() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FDFBF7] text-[#2D1B0D]">
       {/* 1. Header & Navigation */}
-      <Navbar activeSection={activeSection} />
+      <Navbar
+        activeSection={activeSection}
+        onOpenBrandModal={() => setIsBrandModalOpen(true)}
+      />
 
       {/* Main Sections */}
       <main className="flex-1">
@@ -74,7 +79,15 @@ function MainContent() {
       <Footer />
 
       {/* 10. Floating Actions */}
-      <FloatingActions />
+      <FloatingActions
+        onOpenBrandModal={() => setIsBrandModalOpen(true)}
+      />
+
+      {/* 11. Brand Identity & Logo Kit Modal */}
+      <BrandShowcaseModal
+        isOpen={isBrandModalOpen}
+        onClose={() => setIsBrandModalOpen(false)}
+      />
     </div>
   );
 }

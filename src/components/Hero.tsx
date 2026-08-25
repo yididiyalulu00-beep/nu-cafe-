@@ -2,6 +2,7 @@ import React from 'react';
 import { Coffee, MapPin, Clock, Phone, ChevronDown, Sparkles } from 'lucide-react';
 import { CAFE_INFO } from '../data/cafeData';
 import { useLanguage } from '../context/LanguageContext';
+import { NuCafeLogo } from './NuCafeLogo';
 import heroBg from '../assets/images/hero_cafe_ambiance_1787606108294.jpg';
 
 export const Hero: React.FC = () => {
@@ -34,8 +35,18 @@ export const Hero: React.FC = () => {
 
       {/* Content Container */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center flex flex-col items-center">
+        {/* Official Brand Emblem */}
+        <div className="mb-6 relative group">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-white/95 p-2 shadow-2xl border-2 border-[#C5A059]/40 flex items-center justify-center backdrop-blur-md group-hover:scale-105 transition-transform duration-300">
+            <NuCafeLogo size="lg" variant="emblem" theme="original" />
+          </div>
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#1F1209] border border-[#C5A059]/50 text-[#34D399] font-serif text-[11px] font-bold shadow-md whitespace-nowrap">
+            ኑ ካፌ · ADDIS ABABA
+          </div>
+        </div>
+
         {/* Subtle Editorial Pill Tag */}
-        <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#1F1209]/80 border border-[#D4C3A1]/30 text-[#D4C3A1] font-sans-ui text-xs font-medium uppercase tracking-[0.2em] mb-6 backdrop-blur-md shadow-lg">
+        <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-[#1F1209]/80 border border-[#D4C3A1]/30 text-[#D4C3A1] font-sans-ui text-xs font-medium uppercase tracking-[0.2em] mb-4 backdrop-blur-md shadow-lg">
           <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
           <span>{t.hero.cityBadge}</span>
         </div>

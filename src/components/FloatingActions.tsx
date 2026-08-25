@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, ArrowUp, Coffee } from 'lucide-react';
+import { Phone, ArrowUp, Sparkles } from 'lucide-react';
 import { CAFE_INFO } from '../data/cafeData';
 import { useLanguage } from '../context/LanguageContext';
+import { NuCafeLogo } from './NuCafeLogo';
 
-export const FloatingActions: React.FC = () => {
+interface FloatingActionsProps {
+  onOpenBrandModal?: () => void;
+}
+
+export const FloatingActions: React.FC<FloatingActionsProps> = ({ onOpenBrandModal }) => {
   const { language } = useLanguage();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -21,6 +26,23 @@ export const FloatingActions: React.FC = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-3 pointer-events-none">
+      {/* Brand Identity & Logo Kit launcher */}
+      {onOpenBrandModal && (
+        <button
+          id="floating-brand-kit-btn"
+          onClick={onOpenBrandModal}
+          className="pointer-events-auto flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#2D1B0D]/95 hover:bg-[#1F1209] text-white border border-[#279847]/50 shadow-xl hover:scale-105 active:scale-95 transition-all cursor-pointer font-sans-ui group"
+          title="Inspect Nu Café Brand Logo & Kit"
+        >
+          <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center p-0.5 shadow-xs">
+            <NuCafeLogo size="xs" variant="emblem" theme="original" className="w-3.5 h-3.5" />
+          </div>
+          <span className="text-[11px] font-bold uppercase tracking-wider text-[#34D399] group-hover:text-white transition-colors">
+            {language === 'am' ? 'አርማ' : 'Logo Kit'}
+          </span>
+        </button>
+      )}
+
       {/* Mobile Floating Quick Call Button */}
       <a
         id="floating-call-btn"

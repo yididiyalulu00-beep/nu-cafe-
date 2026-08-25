@@ -7,8 +7,9 @@ export interface MenuItem {
   category: 'coffee' | 'tea' | 'juice' | 'pastries' | 'breakfast' | 'snacks';
   description: string;
   descriptionAm?: string;
-  priceText: string; // "Ask for price"
-  priceTextAm?: string; // "ዋጋ ይጠይቁ"
+  priceBirr?: number;
+  priceText: string; // e.g. "70 ETB" or "Ask for price"
+  priceTextAm?: string; // e.g. "70 ብር" or "ዋጋ ይጠይቁ"
   isPopular?: boolean;
   tags?: string[];
   tagsAm?: string[];

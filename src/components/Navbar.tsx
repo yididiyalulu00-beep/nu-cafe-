@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Coffee, Phone, Menu as MenuIcon, X, Clock, MapPin, Globe } from 'lucide-react';
 import { CAFE_INFO } from '../data/cafeData';
 import { useLanguage } from '../context/LanguageContext';
+import { NuCafeLogo } from './NuCafeLogo';
 
 interface NavbarProps {
   activeSection: string;
+  onOpenBrandModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenBrandModal }) => {
   const { language, setLanguage, toggleLanguage, t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -151,15 +153,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             onClick={(e) => handleNavClick(e, '#hero')}
             className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 rounded-full bg-[#C5A059] flex items-center justify-center text-[#2D1B0D] group-hover:scale-105 transition-transform">
-              <Coffee className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-0.5 shadow-md border border-[#D4C3A1]/40 group-hover:scale-105 transition-transform shrink-0">
+              <NuCafeLogo size="sm" variant="emblem" theme="original" />
             </div>
             <div>
               <div className="flex items-baseline gap-1.5">
                 <span className="font-serif text-2xl font-bold tracking-tight text-[#FDFBF7] group-hover:text-[#C5A059] transition-colors">
                   Nu Café
                 </span>
-                <span className="font-serif text-sm font-bold text-[#C5A059]">
+                <span className="font-serif text-sm font-bold text-[#34D399]">
                   (ኑ ካፌ)
                 </span>
               </div>
@@ -220,6 +222,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               </button>
             </div>
 
+            {/* Brand Logo & Kit Modal Trigger */}
+            {onOpenBrandModal && (
+              <button
+                id="navbar-brand-kit-btn"
+                onClick={onOpenBrandModal}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full font-sans-ui text-[11px] font-bold uppercase tracking-wider bg-[#1F1209] text-[#34D399] hover:text-white border border-[#279847]/40 hover:border-[#34D399] transition-all cursor-pointer shadow-xs"
+                title="View Nu Café Official Brand Identity & Logo Kit"
+              >
+                <NuCafeLogo size="xs" variant="emblem" theme="original" className="w-3.5 h-3.5" />
+                <span>{language === 'am' ? 'የካፌው አርማ' : 'Brand Logo'}</span>
+              </button>
+            )}
+
             <a
               id="navbar-call-btn"
               href={`tel:${CAFE_INFO.phoneRaw}`}
@@ -278,13 +293,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             <div>
               <div className="flex items-center justify-between pb-5 border-b border-[#D4C3A1]/20">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-full bg-[#C5A059] flex items-center justify-center text-[#2D1B0D]">
-                    <Coffee className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center p-0.5 shadow-md border border-[#D4C3A1]/40 shrink-0">
+                    <NuCafeLogo size="xs" variant="emblem" theme="original" />
                   </div>
                   <div>
                     <span className="font-serif text-xl font-bold text-[#FDFBF7]">Nu Café</span>
-                    <p className="text-[9px] tracking-[0.2em] uppercase text-[#D4C3A1]/70">
-                      {language === 'am' ? 'አዲስ አበባ' : 'Addis Ababa'}
+                    <p className="text-[9px] tracking-[0.2em] uppercase text-[#34D399] font-bold">
+                      {language === 'am' ? 'ኑ ካፌ · አዲስ አበባ' : 'NU CAFÉ · ADDIS ABABA'}
                     </p>
                   </div>
                 </div>
@@ -367,6 +382,20 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
 
             {/* Mobile Footer action */}
             <div className="pt-5 border-t border-[#D4C3A1]/20 space-y-3 mt-4">
+              {onOpenBrandModal && (
+                <button
+                  id="mobile-drawer-brand-kit-btn"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenBrandModal();
+                  }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#1F1209] text-[#34D399] border border-[#279847]/40 font-bold text-xs uppercase tracking-wider hover:bg-black transition-colors"
+                >
+                  <NuCafeLogo size="xs" variant="emblem" theme="original" className="w-4 h-4" />
+                  <span>{language === 'am' ? 'የኑ ካፌ ይፋዊ አርማ እና መለያ' : 'Brand Identity & Logo Kit'}</span>
+                </button>
+              )}
+
               <a
                 id="mobile-drawer-call-btn"
                 href={`tel:${CAFE_INFO.phoneRaw}`}
